@@ -10,10 +10,7 @@ text to speech, so the vocabulary is fixed and comes off disk.
 
 ## The board
 
-Sold into US K-12 education from about 1983. Branding follows the company:
-Borg-Warner Educational Systems, then Prescription Learning Corp, then Jostens
-Learning. List price was $495. Two hardware revisions exist and are the same
-machine.
+Research indicates this card was sold into US K-12 education from about 1983. Branding follows the company: Borg-Warner Educational Systems, then Prescription Learning Corp, then Jostens Learning. List price was $495. Two hardware revisions exist, and this appears to be the earliest revision.
 
 Revision 1, "UFONIC / JOSTENS LEARNING SYSTEMS, INC.":
 
@@ -32,22 +29,6 @@ Revision 1, "UFONIC / JOSTENS LEARNING SYSTEMS, INC.":
 | 74LS76, 74LS138, 74LS32, 74LS10, 7425 | 1 each | Glue and slot decode |
 | RCA jack | 1 | Audio out |
 | Trimmer marked POT | 1 | See below |
-
-No transistors, about 9 or 10 resistors, bypass caps and a few disc
-capacitors. With no transistor and no amplifier IC, the RCA jack is driven at
-line level, not speaker level.
-
-The counters are not traced. One fit for the parts, unproven: a single 16-bit
-address counter shared by both sides. The two presettable 74LS193s are the
-high byte and two 74LS93s are the low byte. That matches the ROM exactly.
-`ram_set_addr` can load only a page, the low byte comes back as zero, and
-seeking within a page takes dummy reads, which is what a reset-only low byte
-forces. The Apple side's rewind would reset all four stages. The other two
-74LS93s, 8 bits, would suit a DRAM refresh row counter, since a 4164 needs 128
-rows refreshed. Four dual 4:1 muxes give exactly 8 outputs, one per 4164
-address pin, with room for row, column and refresh sources. One shared
-counter also explains the protocol. The Apple writes only while the card
-reports idle, and the ROM rewinds the counter every time it goes idle.
 
 Revision 2, "UFONIC 21-9 / 28-9, PRESCRIPTION LEARNING CORP.", is a CMOS
 redesign: a 60-R6570A PLCC silkscreened 65C10, a TMS5220CNL, two TMS4464
@@ -95,20 +76,9 @@ the output bits the ROM itself just wrote.
 
 The Apple II and the 6500/1 share no command register. The host writes into
 the shared DRAM through the card's other port, then raises an attention line.
-
-The original courseware's whole Apple-side driver is 32 bytes. It is stored
-in `LSAS.SETUP` at $0FD0 and relocated to $0880 with its slot addresses
-patched in:
-
-```
-0880  card_status   lda $Cn00 / cmp #$5F / rts
-0886  ram_read      lda $C0n0 / rts          ; n = slot + 8
-088A  ram_write     sta $C0n0 / rts
-088E  ram_rewind    sta $C0n1 / rts
-0892  card_reset    sta $C0n2 / rts
-0896  go            sta $C0n3 / rts
-089A  wait_idle     jsr card_status / bne wait_idle / rts
-```
+The original software does it through a few small routines, named here for
+what they do: `wait_idle` spins until $Cn00 reads $5F, `ram_rewind` writes
+$C0n1, `ram_write` writes $C0n0, and `go` writes $C0n3.
 
 | Address | Dir | Function |
 | --- | --- | --- |
@@ -150,17 +120,9 @@ so much of its time in skip loops.
 
 ## Loading the vocabulary
 
-`LSAS.SETUP` fills the card in 16 passes of 4 KiB. Each pass reads 16 sectors
-of a track into a buffer at $6500, then writes all 4096 bytes through
-`ram_write`. Track numbers run $12 to $21, which is 16 tracks x 16 sectors x
+The original software fills the card in 16 passes of 4 KiB. Each pass reads 16 sectors
+of a track into a buffer at $6500, then writes all 4096 bytes to $C0n0. Track numbers run $12 to $21, which is 16 tracks x 16 sectors x
 256 bytes, exactly 64 KiB.
-
-Two things will catch you out. The speech image is not a catalogued file:
-tracks 18 to 33 are raw, marked in use in the VTOC and belonging to no
-directory entry. And the sector counter runs down from 15 while the buffer
-pointer runs up, so sector 15 of each track becomes the lowest DRAM page.
-Rebuild the image without that inversion and you get plausible-looking
-garbage.
 
 ## Card RAM layout
 
@@ -428,7 +390,7 @@ drops to 1 in frame 7.
 - The 6500/1 clock rate. Every delay figure in the listing assumes 1 MHz. No
   crystal is identifiable in either photograph.
 - Why `ram_set_addr` pulses PC1 twice rather than once.
-- How the counters are wired. See the board section for the working guess.
+- How the counters are wired.
 - What refreshes the DRAM. A 4164 needs all 128 rows touched every 2 ms.
   Nothing in the ROM's idle loop does it, so refresh is likely in hardware,
   perhaps the spare pair of 74LS93s.

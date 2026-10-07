@@ -1,9 +1,6 @@
 # Ufonic card command reference
 
-Every command the card's 6500/1 ROM accepts, taken from `ufonic-r6500.asm`.
-It comes from static analysis of the ROM dump. Commands $00 $00, $80 and $1C
-have run on a real card through UFDIAG and SPELL. The rest have not, so treat
-their timings and output formats as unproven.
+Every command the card's 6500/1 ROM accepts, taken from `ufonic-r6500.asm`. Commands $00 $00, $80 and $1C have been tested on a real card through UFDIAG and SPELL. The rest have not, so treat their timings and output formats as unproven.
 
 ## Host interface
 

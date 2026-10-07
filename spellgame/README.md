@@ -1,11 +1,9 @@
 # SPELL and UFDIAG
 
-Two programs for the Ufonic card, in 6502 assembly for ACME. Both run on a
-48K Apple II or II+ and every later model, under DOS 3.3, and use only stock
-6502 instructions.
+Two programs for the Ufonic card, in 6502 assembly for ACME.
 
 - `spell.asm`, SPELL, the five modes of the 1978 Speak & Spell, speaking
-  through the card with the toy's own speech.
+  through the card with the original's own speech.
 - `diag.asm`, UFDIAG, a bench diagnostic for the card.
 
 `common.inc` holds the card driver both share. `hgr.inc` and `font.inc` draw
@@ -29,9 +27,7 @@ and BASIC work.
 
 ## Disk layout
 
-`HELLO`, `SPELL` and `UFDIAG` are ordinary catalogued files. The card image
-sits on tracks 18 to 33, outside the catalog, with those tracks marked in use
-in the VTOC. Each track holds 4 KiB of card RAM with its sectors in
+The card image sits on tracks 18 to 33. Each track holds 4 KiB of card RAM with its sectors in
 descending order, sector 15 at the lowest address, the same layout the
 original courseware uses. See `../card/README.md`.
 
@@ -58,7 +54,7 @@ place of speech. The footer says which.
 | CTRL-G | Go, new game in the current mode |
 | CTRL-R | Repeat, speak the current word again |
 | CTRL-C | Clue, help that depends on the mode |
-| CTRL-Q | Quit to BASIC |
+| CTRL-Q | Quit to DOS |
 
 ### Modes
 
@@ -102,19 +98,6 @@ Screen changes that belong to a spoken line run after that wait, so picture
 and sound stay together. If the card stays busy for about 30 seconds the
 footer shows CARD STUCK and SPELL drops to text only mode.
 
-### Memory
-
-| Range | Use |
-| --- | --- |
-| $0800 onward | Code and data |
-| $06 to $09, $FA to $FD | Zero page pointers |
-| $4000 to $5FFF | HGR page 2, the displayed screen |
-| $6800 to $6BFF | Text grid behind the hi-res screen, not displayed |
-| $6D00 to $6DFF | Word deck |
-| $6E00 to $6EFF | Speech queue buffer |
-| $7000 to $7FFF | Track buffer for the speech load |
-| $9D00 to $BFFF | DOS 3.3, kept for RWTS and the exit |
-
 ## UFDIAG
 
 `BRUN UFDIAG`. It shows $Cn00 for every slot and picks the first that
@@ -134,5 +117,3 @@ slot by hand.
 | S | Set the slot |
 | Q | Quit to DOS |
 
-Tests 1, 4 and 5 overwrite the card's RAM, so run SPELL again afterward to
-reload the speech.
