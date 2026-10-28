@@ -1,0 +1,58 @@
+### Ufonic support:
+- Building Reading Skills: The Letter-Sound Farm
+- Building Reading Skills: Short Vowels / Long Vowels (85-02)
+- Spelling Attack
+- A Treasure Hunt of Facts: In Addition and Subtraction
+- Quest: Primary Voice Software Intro Disk
+- Quest Reading 1-13 Main Idea for Passages Level 1
+- Quest Reading 1-15 Making Inferences from Passages 1
+- Quest Reading 2-1 Consonant Blends
+- Quest Reading 2-2 Consonant Digraphs
+- Quest Reading 2-3 Vowel Digraphs
+- Quest Reading 2-4 Vowel Dipthongs
+- Quest Reading 2-5 Context Clues
+- Quest Reading 2-7 Variant Consonant Sounds
+- Quest Reading 3-1 Silent Sleeping Letters
+- Quest Reading 3-2 R-Controlled Vowels
+- Quest Reading 3-3 Making Inferences from Passages 3
+- Quest Math 3-1 Place Value to 6 Digits
+- Quest Math 3-6 Bar Graphs
+- Animal Survival for Ufonic Voice System
+
+### Supposedly support Ufonic, disc images not found:
+- Ufonic Speech Composer
+- Phrase Bank 1, 2, 3, 4
+- Word Bank 3, 4, 5
+- All Sorts of Meggles
+- The Grimble Process
+- Building Reading Skills: Consonants
+- Building Reading Skills: Circus/Zoo
+- Building Reading Skills: Farm/Jungle
+- Building Reading Skills A/B, C/D, E/F
+- Playwriter's Theater
+- Paint With Words
+- Treasure Hunt of Multiplication/Division Facts
+- Journeys Into Math: Bones Voyage
+- Journeys Into Math: Time Trek
+- Learning the Loop
+- Alphabet Academy
+- Weather Wise
+- Harmony Unit Manager
+- Harmony: Animals Sights and Sounds
+- Harmony: Careers in Dilloville
+- Harmony: Croaker's Cafe
+- Harmony: Dr. Frank N. Stein's Body Shop
+- Harmony: Greeting New Friends / Playtime in Dilloville
+- Harmony Cross-References
+- Harmony: Kim Kangaroo's Daily Routine / Dudley Duck's Weather
+- Harmony: School Days / Following Direction
+- Harmony: Shopping for Clothes
+- Harmony: Tina Turtle's Travel Agency
+- Word Race Skillbuilder I
+- Word Race Skillbuilder II
+- Billy Bob's Magic House
+- Phonics CAI (Macmillan)
+- Make a Flash (Macmillan)
+- Reading Realities (Macmillan)
+- Grog the Frog
+- Word Web 5.6
