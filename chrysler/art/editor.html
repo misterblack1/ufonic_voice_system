@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HGR Line Art Editor</title>
+<style>
+  body { margin: 0; background: #222; color: #ddd; font: 13px sans-serif; }
+  #wrap { display: flex; height: 100vh; box-sizing: border-box; }
+  #left { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+  #toolbar {
+    padding: 4px 6px; background: #2c2c2c; border-bottom: 1px solid #444;
+    display: flex; flex-wrap: wrap; gap: 4px; align-items: center;
+  }
+  #toolbar button, #side button {
+    background: #3a3a3a; color: #ddd; border: 1px solid #555;
+    padding: 3px 8px; cursor: pointer; font: 12px sans-serif;
+  }
+  #toolbar button.on { background: #774; border-color: #aa8; }
+  #toolbar button:hover, #side button:hover { background: #4a4a4a; }
+  #toolbar label { color: #aaa; }
+  .sep { width: 8px; }
+  #canvasHolder { flex: 1; overflow: auto; background: #181818; }
+  #screen { display: block; margin: 8px auto; cursor: crosshair; }
+  #status {
+    background: #2c2c2c; border-top: 1px solid #444; padding: 3px 8px;
+    font: 12px monospace; color: #9c9; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  #side {
+    width: 320px; overflow-y: auto; background: #262626;
+    border-left: 1px solid #444; padding: 6px; box-sizing: border-box;
+  }
+  #side h2 {
+    font: bold 12px sans-serif; color: #c96; margin: 10px 0 4px 0;
+    border-bottom: 1px solid #444; padding-bottom: 2px;
+  }
+  .grow { display: flex; align-items: center; gap: 5px; margin: 1px 0; }
+  .gname { cursor: pointer; }
+  .gname:hover { color: #fff; }
+  .act { color: #fd6; font-weight: bold; }
+  .cnt { color: #888; margin-left: auto; font-size: 11px; }
+  .warn { color: #f66; font: 11px monospace; }
+  .sel { color: #6cf; font-weight: bold; }
+  .lrow { cursor: pointer; font: 12px monospace; }
+  .lrow:hover { color: #fff; }
+  #cap0, #cap1, #labelKey {
+    background: #111; color: #ddd; border: 1px solid #555;
+    font: 12px monospace; padding: 2px 4px; margin-bottom: 3px; width: 290px;
+  }
+  #labelKey { width: 30px; }
+  .row { display: flex; gap: 4px; align-items: center; margin: 3px 0; }
+  .muted { color: #888; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="left">
+    <div id="toolbar">
+      <button id="btnOpen">Open</button>
+      <button id="btnSave">Save</button>
+      <label>Zoom
+        <select id="zoom">
+          <option>1</option><option>2</option><option>3</option><option>4</option>
+        </select>
+      </label>
+      <label><input type="checkbox" id="grid"> Grid</label>
+      <span class="sep"></span>
+      <button id="btnNewRun">New run</button>
+      <button id="btnDelRun">Delete run</button>
+      <button id="btnDupRun">Duplicate run</button>
+      <button id="btnFlip">Flip run X</button>
+      <span class="sep"></span>
+      <button id="btnUndo">Undo</button>
+      <button id="btnRedo">Redo</button>
+      <span class="sep"></span>
+      <button id="btnAddGroup">Add group</button>
+      <button id="btnAddOvl">Add overlay</button>
+      <button id="btnRename">Rename</button>
+      <button id="btnDelGroup">Delete group</button>
+    </div>
+    <div id="canvasHolder"><canvas id="screen"></canvas></div>
+    <div id="status"></div>
+  </div>
+  <div id="side">
+    <div><h2>COUNTS</h2><div id="counts" class="muted"></div></div>
+    <div><h2>BASE GROUPS</h2><div id="baseList"></div></div>
+    <div><h2>OVERLAYS</h2><div id="ovlList"></div></div>
+    <div id="hidesSec"><h2 id="hidesTitle">HIDES</h2><div id="hidesList"></div></div>
+    <div><h2>LABELS</h2>
+      <div id="labelList"></div>
+      <div class="row">
+        <button id="btnAddLabel">Add label</button>
+        <button id="btnDelLabel">Delete label</button>
+        <label>Key <input id="labelKey" maxlength="1"></label>
+      </div>
+      <div class="muted">Click a label on the list or canvas, then drag it
+      on the canvas. Label X snaps to a multiple of 7.</div>
+    </div>
+    <div><h2>CAPTIONS</h2>
+      <input id="cap0" maxlength="40" spellcheck="false"><br>
+      <input id="cap1" maxlength="40" spellcheck="false">
+      <div class="muted">Preview only, drawn at the caption rows.</div>
+    </div>
+    <div><h2>WARNINGS</h2><div id="warnList"></div></div>
+  </div>
+</div>
+<input type="file" id="fileInput" accept=".json,application/json" hidden>
+<script src="apple_font.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>
