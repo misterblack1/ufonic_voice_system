@@ -380,21 +380,6 @@ exactly 25 bytes, which is why the raw dump looks like two near-identical
 25-byte halves. The one byte that differs, at offset $12, is where the energy
 drops to 1 in frame 7.
 
-## Open questions
-
-- Port B bits 0 to 4. Bit 7 is the busy flag and the whole byte doubles as
-  character output. Whether the low bits drive anything physical needs
-  continuity testing on a card.
-- Port C bits 3 and 5 are both DRAM controls and are always pulsed 5 then 3.
-  Which is output enable and which is the increment clock is an even bet.
-- The 6500/1 clock rate. Every delay figure in the listing assumes 1 MHz. No
-  crystal is identifiable in either photograph.
-- Why `ram_set_addr` pulses PC1 twice rather than once.
-- How the counters are wired.
-- What refreshes the DRAM. A 4164 needs all 128 rows touched every 2 ms.
-  Nothing in the ROM's idle loop does it, so refresh is likely in hardware,
-  perhaps the spare pair of 74LS93s.
-
 ## References
 
 - TMS5220 datasheet, for the command set, status register and FIFO behavior
@@ -407,7 +392,4 @@ drops to 1 in frame 7.
   card](https://www.applefritter.com/content/help-needed-identify-strange-sound-card),
   which carries the 10-pin speaker connector pinout: pin 4 speaker hot, pin 7
   common, pin 8 headphone tip, pins 1 to 3 and 9 to 10 tone and volume pots
-- Animal Survival for Ufonic Voice System, the courseware the driver and
-  vocabulary layout were read from:
-  [4am crack](https://archive.org/details/AnimalSurvivalUfonic4amCrack) and
-  [flux capture of the original](https://archive.org/details/a2woz_Animal_Survival_for_Ufonic_Voice_System_1989_Hartley_Courseware_v06.29.89)
+
