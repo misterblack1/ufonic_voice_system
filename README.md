@@ -1,6 +1,6 @@
 # Ufonic Voice System
 
-The Ufonic by Jostens Learning Systems Inc. is a speech card for the Apple II. It plays recorded TMS5220 speech held in 64 KiB of RAM on the card. This repository has:
+The Ufonic by Borg-Warner aka Jostens Learning Systems Inc. aka Prescription Learning Corporation is a speech card for the Apple II. It plays recorded TMS5220 speech held in 64 KiB of RAM on the card. There are two versions of this card and this software should work with both. This repository has:
 
 - The card's internal ROM, an annotated disassembly, and a write-up of how
   the card works, in `card/`.
@@ -81,6 +81,10 @@ and the jack. I just picked those values arbitrarily, so better values are possi
 ## Status
 
 No emulator has a Ufonic device, so this software cannot be run in an emulator other than for testing. (Without speech.)
+
+## AI Disclaimer
+
+Parts of this project were coded with assistance from LLMs.
 
 ## License
 
